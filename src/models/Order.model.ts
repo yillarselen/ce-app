@@ -21,9 +21,10 @@ export interface Order {
   ChannelName: string;
   ChannelOrderNo?: string;
   OrderDate?: string;
-  Status?: string;
+  Status: string;
   BillingAddress?: BillingAddress;
   TotalInclVat?: number;
+  CurrencyCode: string;
 }
 
 export interface OrderResult {
