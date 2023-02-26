@@ -14,6 +14,10 @@ Developed with Create React App, Tailwind, Jest and react-testing-library.
 
 In the project directory, you can run:
 
+### `npm install`
+
+and
+
 ### `npm start`
 
 Runs the app in the development mode.\
