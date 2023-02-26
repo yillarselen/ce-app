@@ -62,10 +62,9 @@ const Table = ({ data, colors }: TableProps) => {
               </td>
               <td className="px-6 py-4">{getStatus(item.Status)}</td>
               <td className="px-6 py-4">
-                {item.BillingAddress?.FirstName} {item.BillingAddress?.LastName}
+                {`${item.BillingAddress?.FirstName} ${item.BillingAddress?.LastName}`}
                 <br />
-                {item.BillingAddress?.ZipCode} {item.BillingAddress?.City} (
-                {item.BillingAddress?.CountryIso})
+                {`${item.BillingAddress?.ZipCode} ${item.BillingAddress?.City} (${item.BillingAddress?.CountryIso})`}
               </td>
               <td className="px-6 py-4">
                 {item.CurrencyCode} {item.TotalInclVat}

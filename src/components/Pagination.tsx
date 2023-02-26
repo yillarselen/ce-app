@@ -36,19 +36,13 @@ const Pagination: React.FC<PaginationProps> = ({
         aria-label="Table navigation"
       >
         <span className="text-sm font-normal text-gray-500 dark:text-gray-400">
-          Showing{" "}
-          <span className="font-semibold text-gray-900 dark:text-white">
-            {`${from} - ${to}`}
-          </span>{" "}
-          of{" "}
-          <span className="font-semibold text-gray-900 dark:text-white">
-            {total}
-          </span>
+          {`Showing ${from} - ${to} of ${total}`}
         </span>
 
         {total ? (
           <div className="flex">
             <select
+              data-testid="combobox"
               className="items-center text-gray-500 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 font-medium rounded-lg text-sm p-2 py-2 dark:bg-gray-800 dark:text-white mr-5"
               onChange={(v: React.ChangeEvent<HTMLSelectElement>) => {
                 reset(parseInt(v.target.value));
@@ -61,8 +55,14 @@ const Pagination: React.FC<PaginationProps> = ({
             <ul className="inline-flex items-center -space-x-px">
               <li>
                 <button
+                  data-testid="previous-button"
+                  disabled={currentPage === 1}
                   onClick={() => setOffset((prev) => Math.max(prev - limit, 0))}
-                  className="block px-3 py-2 ml-0 leading-tight text-gray-500 bg-white border border-gray-300 rounded-l-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
+                  className={`block px-3 py-2 ml-0 leading-tight text-gray-500 bg-white border border-gray-300 rounded-l-lg dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 ${
+                    currentPage !== 1
+                      ? "hover:bg-gray-100 hover:text-gray-700 dark:hover:bg-gray-700 dark:hover:text-white"
+                      : " opacity-50"
+                  }`}
                 >
                   <span className="sr-only">Previous</span>
                   <FontAwesomeIcon icon={["fas", "angle-left"]} />
@@ -80,8 +80,8 @@ const Pagination: React.FC<PaginationProps> = ({
                       className={`${
                         currentPage === page
                           ? "bg-blue-500 text-white border-blue-300 hover:bg-blue-500 hover:text-white"
-                          : ""
-                      } px-3 py-2 leading-tight text-gray-500 border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white`}
+                          : " hover:bg-gray-100 hover:text-gray-700"
+                      } px-3 py-2 leading-tight text-gray-500 border border-gray-300 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white`}
                     >
                       {page}
                     </button>
@@ -107,12 +107,18 @@ const Pagination: React.FC<PaginationProps> = ({
               )}
               <li>
                 <button
+                  data-testid="next-button"
+                  disabled={currentPage === pageCount}
                   onClick={() =>
                     setOffset((prev) =>
                       Math.min(prev + limit, highestPossibleOffset)
                     )
                   }
-                  className="block px-3 py-2 leading-tight text-gray-500 bg-white border border-gray-300 rounded-r-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
+                  className={`block px-3 py-2 leading-tight text-gray-500 bg-white border border-gray-300 rounded-r-lg dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 ${
+                    currentPage !== pageCount
+                      ? "hover:bg-gray-100 hover:text-gray-700 dark:hover:bg-gray-700 dark:hover:text-white"
+                      : " opacity-50"
+                  }`}
                 >
                   <span className="sr-only">Next</span>
                   <FontAwesomeIcon icon={["fas", "angle-right"]} />

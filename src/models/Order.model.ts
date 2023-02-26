@@ -2,25 +2,25 @@ export interface Address {
   Line1?: string;
   Line2?: string;
   Line3?: string;
-  Gender: string;
+  Gender?: string;
   CompanyName: string;
   FirstName: string;
   LastName: string;
   StreetName: string;
   HouseNr: string;
-  HouseNrAddition: string;
+  HouseNrAddition?: string;
   ZipCode: string;
   City: string;
-  Region: string;
+  Region?: string;
   CountryIso: string;
   Original?: string;
 }
 
 export interface Line {
-  Gtin: string;
+  Gtin?: string;
   Description: string;
   Quantity: number;
-  UnitPriceInclVat: string;
+  UnitPriceInclVat: number;
 }
 
 export interface Order {
@@ -33,8 +33,8 @@ export interface Order {
   ShippingAddress: Address;
   CurrencyCode: string;
   TotalInclVat?: number;
-  SubTotalInclVat: string;
-  ShippingCostsInclVat: string;
+  SubTotalInclVat: number;
+  ShippingCostsInclVat: number;
   Lines: Line[];
   PaymentMethod: string;
 }

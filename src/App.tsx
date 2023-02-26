@@ -1,8 +1,7 @@
-import { library } from "@fortawesome/fontawesome-svg-core";
-import { faEye, fas } from "@fortawesome/free-solid-svg-icons";
 import Orders from "./components/Orders/Orders";
+import registerIcons from "./utils/registerIcons";
 
-library.add(fas, faEye);
+registerIcons();
 
 function App() {
   return (
