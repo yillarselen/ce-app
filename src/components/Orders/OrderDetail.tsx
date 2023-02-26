@@ -4,6 +4,7 @@ import Modal from "../Modal";
 import { Order } from "../../models/Order.model";
 import { getOrderDate } from "../../utils/helpers";
 import OrderProducts from "./Products/ProductsList";
+import ProductsList from "./Products/ProductsList";
 
 interface OrderDetailProps {
   order: Order;
@@ -38,12 +39,10 @@ const OrderDetail = ({ order, status }: OrderDetailProps) => {
                     </button>
                   </div>
                   <div className="relative p-6 flex-auto">
-                    {/* ORDER */}
-
                     <div>
                       <div className="flex flex-col xl:flex-row jusitfy-center items-stretch w-full xl:space-x-8 space-y-4 md:space-y-6 xl:space-y-0">
                         <div className="flex flex-col justify-start items-start w-full space-y-4 md:space-y-6 xl:space-y-8">
-                          <OrderProducts products={order.Lines} />
+                          <ProductsList products={order.Lines} />
                           <div className="flex justify-center md:flex-row flex-col items-stretch w-full space-y-4 md:space-y-0 md:space-x-6 xl:space-x-8">
                             <div className="flex flex-col px-4 py-6 md:p-6 xl:p-8 w-full bg-gray-50 dark:bg-gray-800 space-y-6">
                               <h3 className="text-xl dark:text-white font-semibold leading-5 text-gray-800">
