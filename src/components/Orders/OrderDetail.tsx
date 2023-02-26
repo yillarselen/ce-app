@@ -3,7 +3,6 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Modal from "../Modal";
 import { Order } from "../../models/Order.model";
 import { getOrderDate } from "../../utils/helpers";
-import OrderProducts from "./Products/ProductsList";
 import ProductsList from "./Products/ProductsList";
 
 interface OrderDetailProps {
