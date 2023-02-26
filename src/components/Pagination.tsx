@@ -1,7 +1,7 @@
 import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-interface PProps {
+interface PaginationProps {
   limit: number;
   offset: number;
   total: number;
@@ -10,7 +10,7 @@ interface PProps {
   reset: (value: number) => void;
 }
 
-const Pagination: React.FC<PProps> = ({
+const Pagination: React.FC<PaginationProps> = ({
   limit,
   offset,
   total,
@@ -46,79 +46,81 @@ const Pagination: React.FC<PProps> = ({
           </span>
         </span>
 
-        <div className="flex">
-          <select
-            className="items-center text-gray-500 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 font-medium rounded-lg text-sm p-2 py-2 dark:bg-gray-800 dark:text-white mr-5"
-            onChange={(v: React.ChangeEvent<HTMLSelectElement>) => {
-              reset(parseInt(v.target.value));
-            }}
-          >
-            {limitOptions.map((item) => (
-              <option key={item}>{item}</option>
-            ))}
-          </select>
-          <ul className="inline-flex items-center -space-x-px">
-            <li>
-              <button
-                onClick={() => setOffset((prev) => Math.max(prev - limit, 0))}
-                className="block px-3 py-2 ml-0 leading-tight text-gray-500 bg-white border border-gray-300 rounded-l-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
-              >
-                <span className="sr-only">Previous</span>
-                <FontAwesomeIcon icon={["fas", "angle-left"]} />
-              </button>
-            </li>
-            {pageArray.map((page) => {
-              return (
-                <li
-                  key={page}
-                  onClick={() => {
-                    setOffset(limit * (page - 1));
-                  }}
+        {total ? (
+          <div className="flex">
+            <select
+              className="items-center text-gray-500 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 font-medium rounded-lg text-sm p-2 py-2 dark:bg-gray-800 dark:text-white mr-5"
+              onChange={(v: React.ChangeEvent<HTMLSelectElement>) => {
+                reset(parseInt(v.target.value));
+              }}
+            >
+              {limitOptions.map((item) => (
+                <option key={item}>{item}</option>
+              ))}
+            </select>
+            <ul className="inline-flex items-center -space-x-px">
+              <li>
+                <button
+                  onClick={() => setOffset((prev) => Math.max(prev - limit, 0))}
+                  className="block px-3 py-2 ml-0 leading-tight text-gray-500 bg-white border border-gray-300 rounded-l-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
                 >
-                  <button
-                    className={`${
-                      currentPage === page
-                        ? "bg-blue-500 text-white border-blue-300 hover:bg-blue-500 hover:text-white"
-                        : ""
-                    } px-3 py-2 leading-tight text-gray-500 border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white`}
+                  <span className="sr-only">Previous</span>
+                  <FontAwesomeIcon icon={["fas", "angle-left"]} />
+                </button>
+              </li>
+              {pageArray.map((page) => {
+                return (
+                  <li
+                    key={page}
+                    onClick={() => {
+                      setOffset(limit * (page - 1));
+                    }}
                   >
-                    {page}
-                  </button>
-                </li>
-              );
-            })}
-            {!pageArray.includes(pageCount) && (
-              <>
-                <span className="px-3 py-2 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
-                  ...
-                </span>
+                    <button
+                      className={`${
+                        currentPage === page
+                          ? "bg-blue-500 text-white border-blue-300 hover:bg-blue-500 hover:text-white"
+                          : ""
+                      } px-3 py-2 leading-tight text-gray-500 border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white`}
+                    >
+                      {page}
+                    </button>
+                  </li>
+                );
+              })}
+              {!pageArray.includes(pageCount) && (
+                <>
+                  <span className="px-3 py-2 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
+                    ...
+                  </span>
 
-                <li
-                  onClick={() => {
-                    setOffset(highestPossibleOffset);
-                  }}
+                  <li
+                    onClick={() => {
+                      setOffset(highestPossibleOffset);
+                    }}
+                  >
+                    <button className="px-3 py-2 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
+                      {pageCount}
+                    </button>
+                  </li>
+                </>
+              )}
+              <li>
+                <button
+                  onClick={() =>
+                    setOffset((prev) =>
+                      Math.min(prev + limit, highestPossibleOffset)
+                    )
+                  }
+                  className="block px-3 py-2 leading-tight text-gray-500 bg-white border border-gray-300 rounded-r-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
                 >
-                  <button className="px-3 py-2 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
-                    {pageCount}
-                  </button>
-                </li>
-              </>
-            )}
-            <li>
-              <button
-                onClick={() =>
-                  setOffset((prev) =>
-                    Math.min(prev + limit, highestPossibleOffset)
-                  )
-                }
-                className="block px-3 py-2 leading-tight text-gray-500 bg-white border border-gray-300 rounded-r-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
-              >
-                <span className="sr-only">Next</span>
-                <FontAwesomeIcon icon={["fas", "angle-right"]} />
-              </button>
-            </li>
-          </ul>
-        </div>
+                  <span className="sr-only">Next</span>
+                  <FontAwesomeIcon icon={["fas", "angle-right"]} />
+                </button>
+              </li>
+            </ul>
+          </div>
+        ) : null}
       </nav>
     </div>
   );

@@ -1,6 +1,6 @@
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { faEye, fas } from "@fortawesome/free-solid-svg-icons";
-import Orders from "./components/Orders";
+import Orders from "./components/Orders/Orders";
 
 library.add(fas, faEye);
 

@@ -1,7 +1,7 @@
-export interface BillingAddress {
-  Line1: string;
-  Line2: string;
-  Line3: string;
+export interface Address {
+  Line1?: string;
+  Line2?: string;
+  Line3?: string;
   Gender: string;
   CompanyName: string;
   FirstName: string;
@@ -16,15 +16,27 @@ export interface BillingAddress {
   Original?: string;
 }
 
+export interface Line {
+  Gtin: string;
+  Description: string;
+  Quantity: number;
+  UnitPriceInclVat: string;
+}
+
 export interface Order {
   Id: number;
   ChannelName: string;
   ChannelOrderNo?: string;
-  OrderDate?: string;
+  OrderDate: string;
   Status: string;
-  BillingAddress?: BillingAddress;
-  TotalInclVat?: number;
+  BillingAddress: Address;
+  ShippingAddress: Address;
   CurrencyCode: string;
+  TotalInclVat?: number;
+  SubTotalInclVat: string;
+  ShippingCostsInclVat: string;
+  Lines: Line[];
+  PaymentMethod: string;
 }
 
 export interface OrderResult {

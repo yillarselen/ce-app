@@ -1,8 +1,9 @@
 import { useEffect, useState, useCallback } from "react";
-import { Order, OrderResult } from "../models/Order.model";
-import { ColorConfig } from "../models/ColorConfig.model";
-import Pagination from "./Pagination";
-import Table from "./Table";
+import { Order, OrderResult } from "../../models/Order.model";
+import { ColorConfig } from "../../models/ColorConfig.model";
+import Pagination from "../Pagination";
+import Table from "../Table";
+import Filter from "../Filter";
 
 const apiKey = process.env.REACT_APP_API_KEY;
 
@@ -14,6 +15,7 @@ const Orders = () => {
   const [totalCount, setTotalCount] = useState(0);
   const [servicePageIndex, setServicePageIndex] = useState(1);
   const [itemsPerPage, setItemsPerPage] = useState(0);
+  const [filterParam, setFilterParam] = useState("");
 
   const colorVariants: ColorConfig = {
     green: "bg-green-500 hover:bg-green-500",
@@ -23,12 +25,14 @@ const Orders = () => {
   };
 
   const fetchOrders = useCallback(async () => {
-    const response = await fetch(
-      `https://api-dev.channelengine.net/api/v2/orders?page=${servicePageIndex}&apikey=${apiKey}`
-    );
+    let url = `https://api-dev.channelengine.net/api/v2/orders?page=${servicePageIndex}&apikey=${apiKey}`;
+    if (filterParam) {
+      url = `${url}&statuses=${filterParam}`;
+    }
+    const response = await fetch(url);
     const data = await response.json();
     return data;
-  }, [servicePageIndex]);
+  }, [servicePageIndex, filterParam]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -46,7 +50,7 @@ const Orders = () => {
     if (!orders) {
       fetchData();
     }
-  }, [servicePageIndex, limit, content, fetchOrders]);
+  }, [servicePageIndex, limit, content, fetchOrders, filterParam]);
 
   useEffect(() => {
     if (itemsPerPage) {
@@ -70,20 +74,14 @@ const Orders = () => {
     setContent({});
   };
 
+  const handleFilter = (item: string) => {
+    resetTable(limit);
+    setFilterParam(item);
+  };
+
   return (
     <>
-      <div className="mb-5">
-        <select
-          id="status"
-          className="inline-flex items-center text-gray-500 bg-white border border-gray-300 focus:outline-none font-medium rounded-lg text-sm p-2 dark:bg-gray-800 dark:text-white dark:border-gray-600"
-        >
-          <option value="">Choose a status</option>
-          <option value="Returned">Returned</option>
-          <option value="Shipped">Shipped</option>
-          <option value="New">New</option>
-          <option value="In Progress">In Progress</option>
-        </select>
-      </div>
+      <Filter handleFilter={handleFilter} />
       <Table data={tableData} colors={colorVariants} />
       <Pagination
         limit={limit}

@@ -3,7 +3,6 @@ import { Status } from "../models/Status.model";
 export const getOrderDate = (date: string): string => {
   const newDate = new Date(date).toLocaleString("en-GB", { timeZone: "UTC" });
 
-  console.log(newDate);
   return newDate;
 };
 

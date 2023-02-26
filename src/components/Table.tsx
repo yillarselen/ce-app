@@ -1,7 +1,7 @@
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { getOrderDate, getStatusConfig } from "../utils/helpers";
 import { ColorConfig } from "../models/ColorConfig.model";
 import { Order } from "../models/Order.model";
+import OrderDetail from "./Orders/OrderDetail";
 
 interface TableProps {
   data?: Order[];
@@ -62,17 +62,16 @@ const Table = ({ data, colors }: TableProps) => {
               </td>
               <td className="px-6 py-4">{getStatus(item.Status)}</td>
               <td className="px-6 py-4">
-                {`${item.BillingAddress?.FirstName} ${item.BillingAddress?.LastName}`}
+                {item.BillingAddress?.FirstName} {item.BillingAddress?.LastName}
                 <br />
-                {`${item.BillingAddress?.ZipCode} ${item.BillingAddress?.City} (${item.BillingAddress?.CountryIso})`}
+                {item.BillingAddress?.ZipCode} {item.BillingAddress?.City} (
+                {item.BillingAddress?.CountryIso})
               </td>
               <td className="px-6 py-4">
-                {`${item.CurrencyCode} ${item.TotalInclVat}`}
+                {item.CurrencyCode} {item.TotalInclVat}
               </td>
               <td className="px-6 py-4">
-                <button>
-                  <FontAwesomeIcon icon={["fas", "eye"]} />
-                </button>
+                <OrderDetail order={item} status={getStatus(item.Status)} />
               </td>
             </tr>
           ))}
