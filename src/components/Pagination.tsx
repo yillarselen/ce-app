@@ -35,7 +35,7 @@ const Pagination: React.FC<PaginationProps> = ({
         className="flex items-center justify-between pt-4"
         aria-label="Table navigation"
       >
-        <span className="text-sm font-normal text-gray-500 dark:text-gray-400">
+        <span className="text-sm font-normal text-gray-500">
           {`Showing ${from} - ${to} of ${total}`}
         </span>
 
@@ -43,7 +43,7 @@ const Pagination: React.FC<PaginationProps> = ({
           <div className="flex">
             <select
               data-testid="combobox"
-              className="items-center text-gray-500 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 font-medium rounded-lg text-sm p-2 py-2 dark:bg-gray-800 dark:hover:bg-gray-800 dark:text-white mr-5"
+              className="items-center text-gray-500 bg-white border border-gray-300 focus:outline-none font-medium rounded-lg text-sm p-2 py-2 mr-5"
               onChange={(v: React.ChangeEvent<HTMLSelectElement>) => {
                 reset(parseInt(v.target.value));
               }}
@@ -58,9 +58,9 @@ const Pagination: React.FC<PaginationProps> = ({
                   data-testid="previous-button"
                   disabled={currentPage === 1}
                   onClick={() => setOffset((prev) => Math.max(prev - limit, 0))}
-                  className={`block px-3 py-2 ml-0 leading-tight text-gray-500 bg-white border border-gray-300 rounded-l-lg dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 ${
+                  className={`block px-3 py-2 ml-0 leading-tight text-gray-500 bg-white border border-gray-300 rounded-l-lg ${
                     currentPage !== 1
-                      ? "hover:bg-gray-100 hover:text-gray-700 dark:hover:bg-gray-700 dark:hover:text-white"
+                      ? "hover:bg-gray-100 hover:text-gray-700"
                       : " opacity-50"
                   }`}
                 >
@@ -79,9 +79,9 @@ const Pagination: React.FC<PaginationProps> = ({
                     <button
                       className={`${
                         currentPage === page
-                          ? "bg-blue-500 text-white border-blue-300 hover:bg-blue-500 dark:hover:bg-gray-700 dark:bg-gray-700 dark:text-white"
-                          : " hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:hover:bg-gray-800"
-                      } px-3 py-2 leading-tight text-gray-500 border border-gray-300 dark:border-gray-700 dark:text-gray-400 dark:hover:text-white`}
+                          ? "bg-blue-500 text-white border-blue-300 hover:bg-blue-500"
+                          : " hover:bg-gray-100 hover:text-gray-700"
+                      } px-3 py-2 leading-tight text-gray-500 border border-gray-300`}
                     >
                       {page}
                     </button>
@@ -90,7 +90,7 @@ const Pagination: React.FC<PaginationProps> = ({
               })}
               {!pageArray.includes(pageCount) && (
                 <>
-                  <span className="px-3 py-2 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
+                  <span className="px-3 py-2 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700">
                     ...
                   </span>
 
@@ -99,7 +99,7 @@ const Pagination: React.FC<PaginationProps> = ({
                       setOffset(highestPossibleOffset);
                     }}
                   >
-                    <button className="px-3 py-2 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
+                    <button className="px-3 py-2 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700">
                       {pageCount}
                     </button>
                   </li>
@@ -114,9 +114,9 @@ const Pagination: React.FC<PaginationProps> = ({
                       Math.min(prev + limit, highestPossibleOffset)
                     )
                   }
-                  className={`block px-3 py-2 leading-tight text-gray-500 bg-white border border-gray-300 rounded-r-lg dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 ${
+                  className={`block px-3 py-2 leading-tight text-gray-500 bg-white border border-gray-300 rounded-r-lg ${
                     currentPage !== pageCount
-                      ? "hover:bg-gray-100 hover:text-gray-700 dark:hover:bg-gray-700 dark:hover:text-white"
+                      ? "hover:bg-gray-100 hover:text-gray-700"
                       : " opacity-50"
                   }`}
                 >

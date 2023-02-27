@@ -19,7 +19,7 @@ const Filter = ({ handleFilter }: FilterProps) => {
       <select
         onChange={handleChange}
         id="status"
-        className="inline-flex items-center text-gray-500 bg-white border border-gray-300 focus:outline-none font-medium rounded-lg text-sm p-2 dark:bg-gray-800 dark:text-white dark:border-gray-600"
+        className="inline-flex items-center text-gray-500 bg-white border border-gray-300 focus:outline-none font-medium rounded-lg text-sm p-2"
       >
         <option value="">Choose a status</option>
         {result.map((item) => {
