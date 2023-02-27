@@ -4,9 +4,7 @@ Developed with Create React App, Tailwind, Jest and react-testing-library.
 
 - Used Tailwind; an efficient CSS framework that enables to create application faster, provides more flexibility with easy-to-build responsive layouts.
 
-##### Note:
-
-Add .env file with your `REACT_APP_API_KEY` to your local project.
+**Note: Add .env file with your `REACT_APP_API_KEY` to your local project.**
 
 [`Project Demo`](https://63f291364388463543ca89a2--stupendous-tiramisu-c25f90.netlify.app/)
 
