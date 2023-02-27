@@ -53,7 +53,7 @@ const Table = ({ data, colors }: TableProps) => {
           {data?.map((item) => (
             <tr
               key={item.Id}
-              className="even:bg-gray-50 odd:bg-white border-b dark:bg-gray-800 dark:border-gray-700"
+              className="even:bg-gray-50 odd:bg-white odd:dark:bg-gray-600 border-b even:dark:bg-gray-800 even:dark:border-gray-700"
             >
               <td className="px-6 py-4">{item.ChannelName}</td>
               <td className="px-6 py-4">{item.ChannelOrderNo}</td>
