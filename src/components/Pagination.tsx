@@ -13,15 +13,15 @@ interface PaginationProps {
 const Pagination: React.FC<PaginationProps> = ({
   limit,
   offset,
-  total,
+  total = 0,
   setLimit,
   setOffset,
   reset,
 }) => {
   const limitOptions = [10, 20, 30, 40, 50];
 
-  const from = Math.min(offset + 1, total);
-  const to = Math.min(offset + limit, total);
+  const from = Math.min(offset + 1, total) | 0;
+  const to = Math.min(offset + limit, total) | 0;
   const pageCount = Math.ceil(total / limit);
   const currentPage = offset / limit + 1;
   const highestPossibleOffset = limit * (pageCount - 1);
