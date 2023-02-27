@@ -6,7 +6,7 @@ Developed with Create React App, Tailwind, Jest and react-testing-library.
 
 **Note: Add .env file with your `REACT_APP_API_KEY` to your local project.**
 
-[`Project Demo`](https://63f291364388463543ca89a2--stupendous-tiramisu-c25f90.netlify.app/)
+[`Project Demo`](https://peaceful-moonbeam-8875c6.netlify.app/)
 
 ## Other dependencies
 
