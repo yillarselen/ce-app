@@ -43,7 +43,7 @@ const Pagination: React.FC<PaginationProps> = ({
           <div className="flex">
             <select
               data-testid="combobox"
-              className="items-center text-gray-500 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 font-medium rounded-lg text-sm p-2 py-2 dark:bg-gray-800 dark:text-white mr-5"
+              className="items-center text-gray-500 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 font-medium rounded-lg text-sm p-2 py-2 dark:bg-gray-800 dark:hover:bg-gray-800 dark:text-white mr-5"
               onChange={(v: React.ChangeEvent<HTMLSelectElement>) => {
                 reset(parseInt(v.target.value));
               }}
@@ -79,9 +79,9 @@ const Pagination: React.FC<PaginationProps> = ({
                     <button
                       className={`${
                         currentPage === page
-                          ? "bg-blue-500 text-white border-blue-300 hover:bg-blue-500 hover:text-white"
-                          : " hover:bg-gray-100 hover:text-gray-700"
-                      } px-3 py-2 leading-tight text-gray-500 border border-gray-300 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white`}
+                          ? "bg-blue-500 text-white border-blue-300 hover:bg-blue-500 dark:hover:bg-gray-700 dark:bg-gray-700 dark:text-white"
+                          : " hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:hover:bg-gray-800"
+                      } px-3 py-2 leading-tight text-gray-500 border border-gray-300 dark:border-gray-700 dark:text-gray-400 dark:hover:text-white`}
                     >
                       {page}
                     </button>
