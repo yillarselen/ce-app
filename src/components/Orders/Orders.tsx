@@ -5,6 +5,7 @@ import Pagination from "../Pagination";
 import Table from "../Table";
 import Filter from "../Filter";
 
+const apiUrl = process.env.REACT_APP_API_URL;
 const apiKey = process.env.REACT_APP_API_KEY;
 
 const Orders = () => {
@@ -25,7 +26,7 @@ const Orders = () => {
   };
 
   const fetchOrders = useCallback(async () => {
-    let url = `https://api-dev.channelengine.net/api/v2/orders?page=${servicePageIndex}&apikey=${apiKey}`;
+    let url = `${apiUrl}/api/v2/orders?page=${servicePageIndex}&apikey=${apiKey}`;
     if (filterParam) {
       url = `${url}&statuses=${filterParam}`;
     }
